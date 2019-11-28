@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>阶语</title>
+  <title>MFC中添加png图片为背景做导航图 | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="阶语">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="#在MFC中添加PNG图片为背景hello KevinBreet">
+<meta name="keywords" content="MFC CIMAGE CBitmap 导航 图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MFC中添加png图片为背景做导航图">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
+<meta property="og:description" content="#在MFC中添加PNG图片为背景hello KevinBreet">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-28T10:53:12.864Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
@@ -153,16 +157,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-MFC添加png图片为背景" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-MFC添加png图片为背景" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/28/MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF/">MFC中添加png图片为背景做导航图</a>
+    <h1 class="article-title" itemprop="name">
+      MFC中添加png图片为背景做导航图
     </h1>
   
 
@@ -176,11 +178,76 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#在MFC中添加PNG图片为背景<br>hello KevinBreet</p>
-        
-          <a class="article-more-a" href="/2019/11/28/MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF/#more">more >></a>
-        
+<a id="more"></a>
+<p>##1.新建文件##<br>&emsp;&emsp;新建一个MFC基于单文档程序，去掉“打印和打印预览”，“资源管理器停靠窗格”，“输出停靠窗格”，“属性停靠窗格”选项，新建文件。</p>
+<p>##2.详解代码##<br>&emsp;&emsp;因为要运行程序时，窗口界面就要以图片为背景绘制出来，所以需要对主类的初始化函数和绘制函数（OnPaint函数）进行修改。</p>
+<pre>
+
+    CCampusNavigationView::CCampusNavigationView()     noexcept  
+    {    
+
+    // TODO: 在此处添加构造代码  
+
+    CImage photo;  
+
+    photo.Load(TEXT("CampusMap.png"));  
+
+    bitmap.Attach(photo.Detach());  
+    }  
+</pre>
+
+<p>&emsp;&emsp;而真正的绘制是在OnDraw(CDC* pDC)中：</p>
+<pre>
+void CCampusNavigationView::OnDraw(CDC* pDC)
+{
+    /*CCampusNavigationDoc* pDoc = GetDocument();//系统原自带
+    ASSERT_VALID(pDoc);
+    if (!pDoc)
+        return;*/
+    CDC memDC;      
+    memDC.CreateCompatibleDC(pDC);
+    memDC.SelectObject(&bitmap);
+    // TODO: 在此处为本机数据添加绘制代码
+    RECT nrect;         
+    GetWindowRect(&nrect);
+    double wide = nrect.right - nrect.left;
+    double height = nrect.bottom - nrect.top;
+    SetStretchBltMode(pDC->m_hDC, COLORONCOLOR);    
+    pDC->StretchBlt(0,0,wide,height,&memDC,0,0,wide,height,SRCCOPY);
+}
+</pre>
+<p>&emsp;&emsp;尤其是上面的最后一行代码需要好好读一下。</p>
+<p>&emsp;&emsp;<strong>今生岑楼愿，与君共勉！</strong></p>
+<hr>
+<p>to be continued</p>
+<table>
+  <tr>
+     <td bgcolor="40E0D0">繁星如叶月如蕊</td>
+  </tr>
+</table>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>好风频借力，送你上青云<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -200,16 +267,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/28/MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/28/MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">原码反码与补码</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -229,302 +355,14 @@
 
 
 
-
   
-    <article id="post-原码反码补码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/">原码反码与补码</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/" class="archive-article-date">
-  	<time datetime="2019-11-26T15:05:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#原码与反码<br>hello KevinBreet</p>
-        
-          <a class="article-more-a" href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">补码 反码 原码 加减法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2019下半学年第12周" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/2019%E4%B8%8B%E5%8D%8A%E5%AD%A6%E5%B9%B4%E7%AC%AC12%E5%91%A8/">2019下半学年第12周大事记</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/16/2019%E4%B8%8B%E5%8D%8A%E5%AD%A6%E5%B9%B4%E7%AC%AC12%E5%91%A8/" class="archive-article-date">
-  	<time datetime="2019-11-16T09:09:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第12周第一天"><a href="#第12周第一天" class="headerlink" title="第12周第一天"></a>第12周第一天</h1><p>hello KevinBreet</p>
-        
-          <a class="article-more-a" href="/2019/11/16/2019%E4%B8%8B%E5%8D%8A%E5%AD%A6%E5%B9%B4%E7%AC%AC12%E5%91%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">英语 编程 考试 感想 计划</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/2019%E4%B8%8B%E5%8D%8A%E5%AD%A6%E5%B9%B4%E7%AC%AC12%E5%91%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/">我的第一篇博客hexo</a>
-    </h1>
   
 
-        
-        <a href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/" class="archive-article-date">
-  	<time datetime="2019-11-16T09:09:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Number-1"><a href="#Number-1" class="headerlink" title="Number 1"></a>Number 1</h2><p>hello KevinBreet</p>
-        
-          <a class="article-more-a" href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">新手 开始</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/16/hello-world/" class="archive-article-date">
-  	<time datetime="2019-11-16T09:02:15.307Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
-        
-          <a class="article-more-a" href="/2019/11/16/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/16/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -547,8 +385,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
