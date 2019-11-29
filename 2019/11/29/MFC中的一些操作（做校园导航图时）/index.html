@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 新手 开始 | 阶语</title>
+  <title>MFC中的一些操作（校园导航图相关） | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="阶语">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E6%96%B0%E6%89%8B-%E5%BC%80%E5%A7%8B&#x2F;index.html">
+  <meta name="description" content="#首先是CFile读写文件hello KevinBreet">
+<meta name="keywords" content="MFC 导航图 CFile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MFC中的一些操作（校园导航图相关）">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;29&#x2F;MFC%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%88%E5%81%9A%E6%A0%A1%E5%9B%AD%E5%AF%BC%E8%88%AA%E5%9B%BE%E6%97%B6%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
+<meta property="og:description" content="#首先是CFile读写文件hello KevinBreet">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;25AsBcF.png">
+<meta property="og:updated_time" content="2019-11-29T17:13:18.217Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;25AsBcF.png">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
   
@@ -153,60 +159,222 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MFC中的一些操作（做校园导航图时）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/" class="archive-article-date">
-  	<time datetime="2019-11-16T09:09:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/">我的第一篇博客hexo</a>
+    <h1 class="article-title" itemprop="name">
+      MFC中的一些操作（校园导航图相关）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/29/MFC%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%88%E5%81%9A%E6%A0%A1%E5%9B%AD%E5%AF%BC%E8%88%AA%E5%9B%BE%E6%97%B6%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2019-11-29T14:25:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#首先是CFile读写文件<br>hello KevinBreet</p>
+<a id="more"></a>
+<p>##读写文件<br>&emsp;&emsp;如果采用open打开文件，选取了打开模式，进而进行读写操作时，如果出现报错：<br><img src="https://i.imgur.com/25AsBcF.png" alt=""></p>
+<p>&emsp;&emsp;证明打开模式出错了，是因为模式不正确。</p>
+<pre>
+GPntFile->Open(TEXT("PNT.dat"), CFile::modeCreate| CFile::typeBinary);
+</pre>
+<p>&emsp;&emsp;如果要写文件，还要加上：</p>
+<pre>
+GPntFile->Open((CString)("PNT.dat"), CFile::modeReadWrite|CFile::modeCreate | CFile::modeNoTruncate);
+&emsp;&emsp;重点是:
+&emsp;&emsp;CFile::modeReadWrite
+</pre>
+
+<p>##CFile相关文件操作</p>
+<p>获取文件的大小：</p>
+<pre>
+file->SeekToEnd(),返回字节大小
+将之 /sizeof(PNT),即可得到对应结构体的个数
+</pre>
+
+<p>#然后是手动刷新</p>
+<pre>
+Invalidate(0);   //手动刷新，会重绘界面，并在之后调用OnDraw函数
+</pre>
+<p>在源文件.CPP中,一般会有<code>#include &quot;stdafx.h&quot;</code>，这个有利于编译时的快捷性，建议保留。</p>
+<p>#调用画笔工具</p>
+<p>对于当前界面要进行绘制，没有绘画类，可以</p>
+<pre>
+CDC *pDC;   //自己手动申请
+pDC=getDC();
+pDC->Ellipse(.....);  //就可以进行绘制了
+</pre>
+<p>如果想要申请画笔工具，改编线条的粗细，颜色等，可以：</p>
+<pre>
+CPen cPen;   //申请画笔
+cPen.CreatePen(PS_SOLID, 10, RGB(255, 0, 0));  //第二，三个参数意为粗度，颜色。
+pDC->SelectObject(&cPen);  
+之后再进行绘制，就可以看到相应的改变了。
+</pre>
+<p><strong>但要注意，使用完以后，一定要释放掉画笔工具<br>DeleteObject(cPen);否则会出现问题！</strong></p>
+<p>#获得界面大小<br>在界面的函数里，使用…就可以获得界面的矩形：</p>
+<pre>
+RECT nrect;
+double width=nrect.right-nrect.left;  //界面的宽
+double height = nrect.bottom - nrect.top;  //界面的高
+</pre>
+
+
+<p>&emsp;&emsp;<strong>今生岑楼愿，与君共勉！</strong></p>
+<hr>
+<p>to be continued</p>
+<table>
+  <tr>
+     <td bgcolor="40E0D0">繁星如叶月如蕊</td>
+  </tr>
+</table>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>好风频借力，送你上青云<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">新手 开始</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">MFC 导航图 CFile</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/29/MFC%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%88%E5%81%9A%E6%A0%A1%E5%9B%AD%E5%AF%BC%E8%88%AA%E5%9B%BE%E6%97%B6%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/11/29/C++%E5%B7%A5%E7%A8%8B%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%8E%E6%BA%90%E6%96%87%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">VS工程头文件与源文件</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -229,9 +397,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

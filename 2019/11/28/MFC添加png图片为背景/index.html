@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MFC中添加png图片为背景做导航图 | 阶语</title>
+  <title>MFC中添加png图片为背景做导航图，逻辑坐标与数据坐标 | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#在MFC中添加PNG图片为背景hello KevinBreet">
+  <meta name="description" content="#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
 <meta name="keywords" content="MFC CIMAGE CBitmap 导航 图片">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MFC中添加png图片为背景做导航图">
+<meta property="og:title" content="MFC中添加png图片为背景做导航图，逻辑坐标与数据坐标">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
-<meta property="og:description" content="#在MFC中添加PNG图片为背景hello KevinBreet">
+<meta property="og:description" content="#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-28T10:53:12.864Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;img&#x2F;abc.png">
+<meta property="og:updated_time" content="2019-11-29T17:56:31.344Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;img&#x2F;abc.png">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
   
@@ -164,7 +166,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MFC中添加png图片为背景做导航图
+      MFC中添加png图片为背景做导航图，逻辑坐标与数据坐标
     </h1>
   
 
@@ -177,7 +179,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#在MFC中添加PNG图片为背景<br>hello KevinBreet</p>
+        <p>#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标<br>hello KevinBreet</p>
 <a id="more"></a>
 <p>##1.新建文件##<br>&emsp;&emsp;新建一个MFC基于单文档程序，去掉“打印和打印预览”，“资源管理器停靠窗格”，“输出停靠窗格”，“属性停靠窗格”选项，新建文件。</p>
 <p>##2.详解代码##<br>&emsp;&emsp;因为要运行程序时，窗口界面就要以图片为背景绘制出来，所以需要对主类的初始化函数和绘制函数（OnPaint函数）进行修改。</p>
@@ -216,7 +218,62 @@ void CCampusNavigationView::OnDraw(CDC* pDC)
     pDC->StretchBlt(0,0,wide,height,&memDC,0,0,wide,height,SRCCOPY);
 }
 </pre>
-<p>&emsp;&emsp;尤其是上面的最后一行代码需要好好读一下。</p>
+<p>&emsp;&emsp;尤其是上面的最后一行代码需要好好读一下。它是说，前四个坐标是想要显示的界面的大小，一般就选择当前界面的大小，之后memDc是环境，之后四个坐标，是对应的真实的图片的大小，左上角与右下角，然后将这部分大小，投影到前面选择的那部分大小上，，会存在一个映射，像投影屏一样，最后一个参数不需要过多了解，只是绘制模式。</p>
+<p>如果之后，我们想要在界面上加入鼠标滚轮的放大缩小功能，就需要搞清楚逻辑坐标与数据坐标。</p>
+<pre>
+pDC->StretchBlt(0,0,(int)wide,(int)height,&memDC,viewx,viewy,wide/Gzoom,height/Gzoom,SRCCOPY);  
+//这段应该就能理解意思了
+</pre>
+
+<p>在鼠标的滚轮函数中：</p>
+<pre>
+BOOL CCampusNavigationView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+// TODO: 在此添加消息处理程序代码和/或调用默认值
+if (GState == STATE_LOOK||GState==STATE_NAVIGATION) 
+{
+    double truex = (double)viewx + pt.x / Gzoom;
+    double truey = (double)viewy + pt.y / Gzoom;
+    RECT nrect;
+    GetWindowRect(&nrect);
+    double tGzoom = Gzoom;
+    if (zDelta > 0)
+    {
+        Gzoom += 0.01;  //放大
+    }
+    else if (zDelta < 0)
+    {
+        Gzoom -= 0.01;  //缩小
+    }
+    if (Gzoom > 2.5) Gzoom = 2.5;
+    if (Gzoom < 0.5) Gzoom = 0.5;
+
+    if ((viewx + (nrect.right - nrect.left) / Gzoom > Gmax_x) || (viewx < 0)) //这里是设置放大缩小的边界，避免欢迎的出现
+    Gzoom = tGzoom;
+    if ((viewy + (nrect.bottom - nrect.top) / Gzoom > Gmax_y) || (viewy < 0))
+    Gzoom = tGzoom;
+
+    viewx = (int)(truex - pt.x / Gzoom); //得到对应的界面左上角坐标
+    viewy = (int)(truey - pt.y / Gzoom);
+    Invalidate(0);
+
+    }
+    return CView::OnMouseWheel(nFlags, zDelta, pt);
+}
+</pre>
+
+<p>其实对于放大缩小过程中，界面的变化，我们希望的是，在鼠标滚轮滚动时，界面因为放大缩小进行缩放，而鼠标仍停留在相对于原图片不变的点。<br><img src="/img/abc.png" alt=""></p>
+<p>其实我们只需要变换为真实坐标以后的数据一样就可以了。</p>
+<pre>
+tPnt.x = viewx+point.x/Gzoom;   //存储的是实际坐标
+tPnt.y = viewy+point.y/Gzoom;
+//——————————————————————————————————————//
+ReadPntFile(file, i, tPnt);
+tPnt.x = (tPnt.x - viewx)*Gzoom;  //变换为窗口坐标系
+tPnt.y = (tPnt.y - viewy)*Gzoom;
+</pre>
+
+
 <p>&emsp;&emsp;<strong>今生岑楼愿，与君共勉！</strong></p>
 <hr>
 <p>to be continued</p>
@@ -327,6 +384,15 @@ void CCampusNavigationView::OnDraw(CDC* pDC)
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/11/29/Undone1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Undone1
+        
+      </div>
+    </a>
   
   
     <a href="/2019/11/26/%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
@@ -456,6 +522,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">英语 编程 考试 感想 计划</a>
               </li>
              
@@ -464,11 +534,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">MFC 导航图 CFile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">新手 开始</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">结构体 重载 运算符</a>
               </li>
             
             <div class="clearfix"></div>

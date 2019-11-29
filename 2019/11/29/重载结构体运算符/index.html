@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 新手 开始 | 阶语</title>
+  <title>重载结构体运算符 | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="阶语">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E6%96%B0%E6%89%8B-%E5%BC%80%E5%A7%8B&#x2F;index.html">
+  <meta name="description" content="#重载结构体运算符（文章来源）hello KevinBreet">
+<meta name="keywords" content="结构体 重载 运算符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重载结构体运算符">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;29&#x2F;%E9%87%8D%E8%BD%BD%E7%BB%93%E6%9E%84%E4%BD%93%E8%BF%90%E7%AE%97%E7%AC%A6&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
+<meta property="og:description" content="#重载结构体运算符（文章来源）hello KevinBreet">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-29T17:25:25.911Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
@@ -153,60 +157,225 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-重载结构体运算符" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/" class="archive-article-date">
-  	<time datetime="2019-11-16T09:09:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/16/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2hexo/">我的第一篇博客hexo</a>
+    <h1 class="article-title" itemprop="name">
+      重载结构体运算符
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/29/%E9%87%8D%E8%BD%BD%E7%BB%93%E6%9E%84%E4%BD%93%E8%BF%90%E7%AE%97%E7%AC%A6/" class="archive-article-date">
+  	<time datetime="2019-11-29T14:07:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#重载结构体运算符（<a href="https://www.cnblogs.com/xielechuan/archive/2012/05/25/2518358.html" target="_blank" rel="noopener">文章来源</a>）<br>hello KevinBreet</p>
+<a id="more"></a>
+<p>&emsp;&emsp;一般用于定义完结构体后应用的简单运算，比如重载<strong>“=”</strong>就可以方便的实现结构体赋值等。</p>
+<pre>
+struct Currency 
+{
+    int Dollar;
+    int Cents;
+}
+</pre>
+
+<p>##重载IO输出操作，注意是友元函数重载,结构体外部具体定义</p>
+<pre>
+ostream& operator<<(ostream &out,Currency value)
+{
+ out<<......;
+</pre>
+
+<p>##重载“=，+，-，*”等，在结构体内部定义</p>
+<pre>
+Currency& operator=(Currency& value)
+    {
+        Dollar = value.Dollar;
+        Cents = value.Cents;
+        return *this;
+    }
+Currency& operator+(Currency& value)
+    {
+        Dollar += value.Dollar;
+        Cents += value.Cents;
+        return *this;
+    }
+&emsp;&emsp;等等
+</pre>
+
+<p>##赋值,可采取直接赋值</p>
+<pre>
+struct InitMember test = {-10,3.141590，"method one"，0.25}；
+</pre>
+
+
+<p>&emsp;&emsp;<strong>今生岑楼愿，与君共勉！</strong></p>
+<hr>
+<p>to be continued</p>
+<table>
+  <tr>
+     <td bgcolor="40E0D0">繁星如叶月如蕊</td>
+  </tr>
+</table>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>好风频借力，送你上青云<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">新手 开始</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">结构体 重载 运算符</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/29/%E9%87%8D%E8%BD%BD%E7%BB%93%E6%9E%84%E4%BD%93%E8%BF%90%E7%AE%97%E7%AC%A6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/29/C++%E5%B7%A5%E7%A8%8B%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%8E%E6%BA%90%E6%96%87%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          VS工程头文件与源文件
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/11/29/Undone1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Undone1</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -229,9 +398,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
