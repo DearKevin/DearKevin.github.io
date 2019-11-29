@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>原码反码与补码 | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#原码与反码hello KevinBreet">
+  <meta name="description" content="原码与反码hello KevinBreet">
 <meta name="keywords" content="补码 反码 原码 加减法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原码反码与补码">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
-<meta property="og:description" content="#原码与反码hello KevinBreet">
+<meta property="og:description" content="原码与反码hello KevinBreet">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T16:45:33.077Z">
+<meta property="og:updated_time" content="2019-11-29T18:11:02.856Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
@@ -177,11 +177,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#原码与反码<br>hello KevinBreet</p>
+        <h1 id="原码与反码"><a href="#原码与反码" class="headerlink" title="原码与反码"></a>原码与反码</h1><p>hello KevinBreet</p>
 <a id="more"></a>
 <p>&emsp;&emsp;从上有关编程课的最开始，就已经了解到原码反码补码的存在，当时只是看了些相关资料，没有深入研究，误以为自己已经懂了，但事实上，在以后的实践中，经常因为没有弄清，混淆了概念而出错，今天看了CSDN上一篇 <a href="https://blog.csdn.net/weixin_42837024/article/details/102524874" target="_blank" rel="noopener">博客</a>写的很好，故今日总结如下：</p>
-<p>##反码补码的需要<br>计算机中只有加法运算器，减法是可以通过加法来实现的，其中需要考虑的就是正数与负数的减法，反码的产生就是为了解决这种问题。</p>
-<p>以4位二进制数为例：<br>###反码：<br>正数的反码还是等于原码，负数的反码等于除其符号位外，按位取反。</p>
+<h2 id="反码补码的需要"><a href="#反码补码的需要" class="headerlink" title="反码补码的需要"></a>反码补码的需要</h2><p>计算机中只有加法运算器，减法是可以通过加法来实现的，其中需要考虑的就是正数与负数的减法，反码的产生就是为了解决这种问题。</p>
+<p>以4位二进制数为例：</p>
+<h3 id="反码："><a href="#反码：" class="headerlink" title="反码："></a>反码：</h3><p>正数的反码还是等于原码，负数的反码等于除其符号位外，按位取反。</p>
 <table>
 <thead>
 <tr>
@@ -238,7 +239,7 @@
 </tbody></table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1+(-1)=0001+1110=1111（-0）；                       1+（-2）=0001+1101=1110（-1）</span><br></pre></td></tr></table></figure>
 
-<p>###补码：<br>正数的补码等于它的原码，负数的补码等于反码+1.另一种解释是，负数的补码等于它的原码自低位向高位，尾数的第一个‘1’及其右边的‘0’保持不变，左边的各位按位取反，符号位不变。（注意：这只是<strong>结果上的相等</strong>，不是<strong>补码的定义</strong>！）</p>
+<h3 id="补码："><a href="#补码：" class="headerlink" title="补码："></a>补码：</h3><p>正数的补码等于它的原码，负数的补码等于反码+1.另一种解释是，负数的补码等于它的原码自低位向高位，尾数的第一个‘1’及其右边的‘0’保持不变，左边的各位按位取反，符号位不变。（注意：这只是<strong>结果上的相等</strong>，不是<strong>补码的定义</strong>！）</p>
 <table>
 <thead>
 <tr>
@@ -321,7 +322,7 @@
 <p>简单的验证一下：</p>
 <p>-5 -（-5）= 1011 + 0101 = 0000（0） 正确</p>
 <p>6 - 14 = 0110 + 0010 = 1000（-8） 正确</p>
-<p>###另一个需要注意的问题<br>注意这种表示方法的范围：有符号位的四位二进制数补码中，表示范围为：‘-8~7’</p>
+<h3 id="另一个需要注意的问题"><a href="#另一个需要注意的问题" class="headerlink" title="另一个需要注意的问题"></a>另一个需要注意的问题</h3><p>注意这种表示方法的范围：有符号位的四位二进制数补码中，表示范围为：‘-8~7’</p>
 <p>&emsp;&emsp;<strong>今生岑楼愿，与君共勉！</strong></p>
 <hr>
 <p>to be continued</p>
@@ -570,19 +571,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">英语 编程 考试 感想 计划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,6 +584,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">新手 开始</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
               </li>
              
               <li class="article-tag-list-item">

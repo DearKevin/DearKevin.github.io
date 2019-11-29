@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>MFC中的一些操作（校园导航图相关） | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#首先是CFile读写文件hello KevinBreet">
+  <meta name="description" content="首先是CFile读写文件hello KevinBreet">
 <meta name="keywords" content="MFC 导航图 CFile">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MFC中的一些操作（校园导航图相关）">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;29&#x2F;MFC%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C%EF%BC%88%E5%81%9A%E6%A0%A1%E5%9B%AD%E5%AF%BC%E8%88%AA%E5%9B%BE%E6%97%B6%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
-<meta property="og:description" content="#首先是CFile读写文件hello KevinBreet">
+<meta property="og:description" content="首先是CFile读写文件hello KevinBreet">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;25AsBcF.png">
-<meta property="og:updated_time" content="2019-11-29T17:13:18.217Z">
+<meta property="og:updated_time" content="2019-11-29T18:12:03.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;25AsBcF.png">
   
@@ -179,9 +179,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#首先是CFile读写文件<br>hello KevinBreet</p>
+        <h1 id="首先是CFile读写文件"><a href="#首先是CFile读写文件" class="headerlink" title="首先是CFile读写文件"></a>首先是CFile读写文件</h1><p>hello KevinBreet</p>
 <a id="more"></a>
-<p>##读写文件<br>&emsp;&emsp;如果采用open打开文件，选取了打开模式，进而进行读写操作时，如果出现报错：<br><img src="https://i.imgur.com/25AsBcF.png" alt=""></p>
+<h2 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h2><p>&emsp;&emsp;如果采用open打开文件，选取了打开模式，进而进行读写操作时，如果出现报错：<br><img src="https://i.imgur.com/25AsBcF.png" alt=""></p>
 <p>&emsp;&emsp;证明打开模式出错了，是因为模式不正确。</p>
 <pre>
 GPntFile->Open(TEXT("PNT.dat"), CFile::modeCreate| CFile::typeBinary);
@@ -193,20 +193,17 @@ GPntFile->Open((CString)("PNT.dat"), CFile::modeReadWrite|CFile::modeCreate | CF
 &emsp;&emsp;CFile::modeReadWrite
 </pre>
 
-<p>##CFile相关文件操作</p>
-<p>获取文件的大小：</p>
+<h2 id="CFile相关文件操作"><a href="#CFile相关文件操作" class="headerlink" title="CFile相关文件操作"></a>CFile相关文件操作</h2><p>获取文件的大小：</p>
 <pre>
 file->SeekToEnd(),返回字节大小
 将之 /sizeof(PNT),即可得到对应结构体的个数
 </pre>
 
-<p>#然后是手动刷新</p>
-<pre>
+<h1 id="然后是手动刷新"><a href="#然后是手动刷新" class="headerlink" title="然后是手动刷新"></a>然后是手动刷新</h1><pre>
 Invalidate(0);   //手动刷新，会重绘界面，并在之后调用OnDraw函数
 </pre>
 <p>在源文件.CPP中,一般会有<code>#include &quot;stdafx.h&quot;</code>，这个有利于编译时的快捷性，建议保留。</p>
-<p>#调用画笔工具</p>
-<p>对于当前界面要进行绘制，没有绘画类，可以</p>
+<h1 id="调用画笔工具"><a href="#调用画笔工具" class="headerlink" title="调用画笔工具"></a>调用画笔工具</h1><p>对于当前界面要进行绘制，没有绘画类，可以</p>
 <pre>
 CDC *pDC;   //自己手动申请
 pDC=getDC();
@@ -220,7 +217,7 @@ pDC->SelectObject(&cPen);
 之后再进行绘制，就可以看到相应的改变了。
 </pre>
 <p><strong>但要注意，使用完以后，一定要释放掉画笔工具<br>DeleteObject(cPen);否则会出现问题！</strong></p>
-<p>#获得界面大小<br>在界面的函数里，使用…就可以获得界面的矩形：</p>
+<h1 id="获得界面大小"><a href="#获得界面大小" class="headerlink" title="获得界面大小"></a>获得界面大小</h1><p>在界面的函数里，使用…就可以获得界面的矩形：</p>
 <pre>
 RECT nrect;
 double width=nrect.right-nrect.left;  //界面的宽
@@ -467,19 +464,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">英语 编程 考试 感想 计划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,6 +477,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">新手 开始</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
               </li>
              
               <li class="article-tag-list-item">

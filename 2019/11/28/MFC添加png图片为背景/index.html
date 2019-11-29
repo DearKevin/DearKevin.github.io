@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>MFC中添加png图片为背景做导航图，逻辑坐标与数据坐标 | 阶语</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
+  <meta name="description" content="在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
 <meta name="keywords" content="MFC CIMAGE CBitmap 导航 图片">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MFC中添加png图片为背景做导航图，逻辑坐标与数据坐标">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;MFC%E6%B7%BB%E5%8A%A0png%E5%9B%BE%E7%89%87%E4%B8%BA%E8%83%8C%E6%99%AF&#x2F;index.html">
 <meta property="og:site_name" content="阶语">
-<meta property="og:description" content="#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
+<meta property="og:description" content="在MFC中添加PNG图片为背景，逻辑坐标与数据坐标hello KevinBreet">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;img&#x2F;abc.png">
-<meta property="og:updated_time" content="2019-11-29T17:56:31.344Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;TXqkkdy.png">
+<meta property="og:updated_time" content="2019-11-29T18:09:36.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;img&#x2F;abc.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;TXqkkdy.png">
   
     <link rel="alternative" href="/atom.xml" title="阶语" type="application/atom+xml">
   
@@ -179,10 +179,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标<br>hello KevinBreet</p>
+        <h1 id="在MFC中添加PNG图片为背景，逻辑坐标与数据坐标"><a href="#在MFC中添加PNG图片为背景，逻辑坐标与数据坐标" class="headerlink" title="在MFC中添加PNG图片为背景，逻辑坐标与数据坐标"></a>在MFC中添加PNG图片为背景，逻辑坐标与数据坐标</h1><p>hello KevinBreet</p>
 <a id="more"></a>
-<p>##1.新建文件##<br>&emsp;&emsp;新建一个MFC基于单文档程序，去掉“打印和打印预览”，“资源管理器停靠窗格”，“输出停靠窗格”，“属性停靠窗格”选项，新建文件。</p>
-<p>##2.详解代码##<br>&emsp;&emsp;因为要运行程序时，窗口界面就要以图片为背景绘制出来，所以需要对主类的初始化函数和绘制函数（OnPaint函数）进行修改。</p>
+<h2 id="1-新建文件"><a href="#1-新建文件" class="headerlink" title="1.新建文件"></a>1.新建文件</h2><p>&emsp;&emsp;新建一个MFC基于单文档程序，去掉“打印和打印预览”，“资源管理器停靠窗格”，“输出停靠窗格”，“属性停靠窗格”选项，新建文件。</p>
+<h2 id="2-详解代码"><a href="#2-详解代码" class="headerlink" title="2.详解代码"></a>2.详解代码</h2><p>&emsp;&emsp;因为要运行程序时，窗口界面就要以图片为背景绘制出来，所以需要对主类的初始化函数和绘制函数（OnPaint函数）进行修改。</p>
 <pre>
 
     CCampusNavigationView::CCampusNavigationView()     noexcept  
@@ -262,7 +262,8 @@ if (GState == STATE_LOOK||GState==STATE_NAVIGATION)
 }
 </pre>
 
-<p>其实对于放大缩小过程中，界面的变化，我们希望的是，在鼠标滚轮滚动时，界面因为放大缩小进行缩放，而鼠标仍停留在相对于原图片不变的点。<br><img src="/img/abc.png" alt=""></p>
+<p>其实对于放大缩小过程中，界面的变化，我们希望的是，在鼠标滚轮滚动时，界面因为放大缩小进行缩放，而鼠标仍停留在相对于原图片不变的点。</p>
+<p><img src="https://i.imgur.com/TXqkkdy.png" alt=""></p>
 <p>其实我们只需要变换为真实坐标以后的数据一样就可以了。</p>
 <pre>
 tPnt.x = viewx+point.x/Gzoom;   //存储的是实际坐标
@@ -522,19 +523,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">英语 编程 考试 感想 计划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">VS 工程 头文件格式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,6 +536,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">新手 开始</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">MFC CIMAGE CBitmap 导航 图片</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">补码 反码 原码 加减法</a>
               </li>
              
               <li class="article-tag-list-item">
